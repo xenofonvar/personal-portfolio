@@ -1,0 +1,206 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const terminalLines = [
+  { time: '14:22:01', msg: 'System initialized. Handshake established with user_session_492.' },
+  { time: '14:22:05', msg: 'Port 8080 listening for incoming transmission packets.' },
+  { time: '14:22:12', msg: 'Location services resolved: Athens (GR) Node 01.' },
+  { time: '14:23:00', msg: 'Awaiting payload entry from remote client...' },
+];
+
+const identity = [
+  { key: 'IDENTIFIER', value: 'Xenofon Varelis' },
+  { key: 'ORIGIN',     value: 'Athens, Greece' },
+  { key: 'CHANNEL',    value: 'xenvarelis@hotmail.com' },
+  { key: 'RESPONSE',   value: '< 24 hours' },
+];
+---
+
+<Layout
+  title="Contact | Xenofon Varelis"
+  description="Contact Xenofon Varelis — initiate a connection for freelance work, collaborations, or opportunities."
+>
+  <!-- Page header -->
+  <section class="bg-surface-low py-20 border-b border-outline-var" aria-label="Page header">
+    <div class="mx-auto max-w-7xl px-6">
+      <h1 class="page-title mb-6">
+        <span class="text-on-surface">Establish</span>
+        <br />
+        <span class="gradient-text">Connection</span>
+      </h1>
+      <p class="max-w-xl text-on-surface-var text-base leading-relaxed">
+        Initiate a high-priority transmission. The system is currently optimized for new
+        inquiries and architectural collaborations.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface" aria-label="Contact interface">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+        <!-- Left: Identity panel + terminal log -->
+        <div class="lg:col-span-2 flex flex-col gap-6">
+
+          <!-- Identity card -->
+          <div class="card p-6" id="contact-identity-panel">
+            <p class="section-label text-primary mb-5">// USER_IDENTITY</p>
+            <dl class="space-y-4">
+              {identity.map(({ key, value }) => (
+                <div class="flex flex-col gap-1">
+                  <dt class="section-label text-outline text-xs">{key}</dt>
+                  <dd
+                    class={`font-mono font-semibold text-sm ${key === 'CHANNEL' ? 'text-primary' : 'text-on-surface'}`}
+                    style="letter-spacing: 0.02em;"
+                  >
+                    {key === 'CHANNEL'
+                      ? <a href={`mailto:${value}`} class="hover:underline">{value}</a>
+                      : value
+                    }
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <!-- Terminal log -->
+          <div
+            class="card p-5 font-mono text-xs leading-relaxed overflow-hidden"
+            style="background: #050710;"
+            id="contact-terminal-log"
+            aria-label="System log"
+          >
+            <div class="flex items-center gap-2 mb-4 pb-3 border-b border-outline-var">
+              <div class="w-2 h-2 rounded-full bg-red-500 opacity-70"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-400 opacity-70"></div>
+              <div class="w-2 h-2 rounded-full bg-primary opacity-70"></div>
+              <span class="section-label text-outline ml-2 text-xs">SYSTEM_LOG</span>
+            </div>
+            {terminalLines.map((line) => (
+              <div class="mb-2">
+                <span class="text-outline">[{line.time}]</span>{' '}
+                <span class="text-on-surface-var">{line.msg}</span>
+              </div>
+            ))}
+            <div class="mt-3 flex items-center gap-1">
+              <span class="text-primary">&gt;</span>
+              <span class="text-on-surface-var"> awaiting_input</span>
+              <span class="cursor-blink text-primary ml-1">_</span>
+            </div>
+          </div>
+
+          <!-- Social links -->
+          <div class="flex gap-3">
+            <a
+              href="https://github.com/xenofonvar"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-ghost flex-1 justify-center"
+              id="contact-github-link"
+            >
+              GITHUB
+            </a>
+            <a
+              href="https://www.linkedin.com/in/xenofon-varelis-71ba18231"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-ghost flex-1 justify-center"
+              id="contact-linkedin-link"
+            >
+              LINKEDIN
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Contact form -->
+        <div class="lg:col-span-3">
+          <div class="card p-8" id="contact-form-panel">
+            <p class="section-label text-primary mb-6">// TRANSMISSION_PAYLOAD</p>
+
+            <form
+              id="contact-form"
+              class="space-y-5"
+              novalidate
+              action="mailto:xenvarelis@hotmail.com"
+              method="GET"
+              enctype="text/plain"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="flex flex-col gap-2">
+                  <label for="form-name" class="section-label text-outline">IDENTIFIER</label>
+                  <input
+                    type="text"
+                    id="form-name"
+                    name="name"
+                    placeholder="John Doe"
+                    required
+                    class="w-full px-4 py-3 rounded-sm text-sm font-mono text-on-surface placeholder-outline outline-none transition-all duration-200"
+                    style="background: #050710; border: 1px solid rgba(68,72,79,0.4); caret-color: #9cff93;"
+                  />
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label for="form-email" class="section-label text-outline">RETURN_ADDRESS</label>
+                  <input
+                    type="email"
+                    id="form-email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                    class="w-full px-4 py-3 rounded-sm text-sm font-mono text-on-surface placeholder-outline outline-none transition-all duration-200"
+                    style="background: #050710; border: 1px solid rgba(68,72,79,0.4); caret-color: #9cff93;"
+                  />
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="form-subject" class="section-label text-outline">SUBJECT_LINE</label>
+                <input
+                  type="text"
+                  id="form-subject"
+                  name="subject"
+                  placeholder="Project proposal / Collaboration / Opportunity..."
+                  class="w-full px-4 py-3 rounded-sm text-sm font-mono text-on-surface placeholder-outline outline-none transition-all duration-200"
+                  style="background: #050710; border: 1px solid rgba(68,72,79,0.4); caret-color: #9cff93;"
+                />
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="form-message" class="section-label text-outline">MESSAGE_BODY</label>
+                <textarea
+                  id="form-message"
+                  name="body"
+                  rows="6"
+                  placeholder="Describe your project, inquiry, or idea..."
+                  required
+                  class="w-full px-4 py-3 rounded-sm text-sm font-mono text-on-surface placeholder-outline outline-none transition-all duration-200 resize-y"
+                  style="background: #050710; border: 1px solid rgba(68,72,79,0.4); caret-color: #9cff93; min-height: 140px;"
+                ></textarea>
+              </div>
+
+              <div class="flex items-center justify-between gap-4 pt-2">
+                <button
+                  type="submit"
+                  id="contact-submit-btn"
+                  class="btn-primary"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                  </svg>
+                  SEND
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  input:focus,
+  textarea:focus {
+    border-color: rgba(156, 255, 147, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(156, 255, 147, 0.08);
+  }
+</style>

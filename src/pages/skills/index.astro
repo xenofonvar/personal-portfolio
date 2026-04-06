@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const skillGroups = [
+  {
+    id: 'languages',
+    label: 'Languages',
+ 
+    items: [
+      { name: 'JavaScript' },
+      { name: 'TypeScript' },
+      { name: 'Python' },
+    ],
+  },
+  {
+    id: 'frontend',
+    label: 'Frontend Technologies',
+    items: [
+      { name: 'React' },
+      { name: 'SolidJS' },
+      { name: 'Vue Js' },
+      { name: 'Nuxt Js' },
+      { name: 'Tailwind CSS' },
+      { name: 'Flutter' },
+      { name: 'Astro' },
+      { name: 'CSS/HTML' },
+    ],
+  },
+  {
+    id: 'backend',
+    label: 'Backend',
+    items: [
+      { name: 'Node.js' },
+      { name: 'Hapi.js' },
+      { name: 'FastAPI' },
+      { name: 'Express.js' },
+    ],
+  },
+
+];
+
+const education = [
+  {
+    degree: 'M.Sc in AI & Deep Learning',
+    institution: 'UNIWA — University of West Attica',
+    status: 'In Progress',
+    desc: 'Advanced research into neural network architectures, computer vision, and NLP. Currently investigating generative modeling for edge device deployment.',
+    tags: ['Deep Learning', 'Computer Vision', 'NLP', 'Edge AI'],
+  },
+  {
+    degree: 'B.Sc in Computer Science',
+    institution: 'AUEB — Athens University of Economics & Business',
+    status: 'Graduated with Honors',
+    desc: 'Comprehensive foundation in algorithms, data structures, and software engineering. Focused on distributed systems and database logic.',
+    tags: ['Algorithms', 'Distributed Systems', 'Database Logic'],
+  },
+];
+---
+
+<Layout
+  title="Skills & Education | Xenofon Varelis"
+  description="Technical skills, programming languages, frameworks, and academic background of Xenofon Varelis."
+>
+  <!-- Page header -->
+  <section class="bg-surface-low py-20 border-b border-outline-var" aria-label="Page header">
+    <div class="mx-auto max-w-7xl px-6">
+      <h1 class="page-title mb-6">
+        <span class="text-on-surface">Skills &</span>
+        <br />
+        <span class="gradient-text">Academics</span>
+      </h1>
+      <p class="max-w-2xl text-on-surface-var text-base leading-relaxed">
+        A comprehensive overview of my technical toolkit, programming languages, and educational background.
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills grid -->
+  <section class="py-20 bg-surface" aria-label="Technical skills">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <p class="section-label text-outline mb-2">// TECHNICAL_STACK</p>
+          <h2 class="font-display font-bold text-2xl text-on-surface tracking-tight" style="letter-spacing: -0.01em;">
+            Core Competencies
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {skillGroups.map((group) => (
+          <div class="card p-6" id={`skill-group-${group.id}`}>
+            <div class="flex items-start justify-between mb-5">
+              <div>
+                <p class="section-label text-primary mb-1">{group.label}</p>
+              </div>
+            </div>
+            <ul class="flex flex-wrap gap-3">
+              {group.items.map((item) => (
+                <li class="flex items-center gap-2 bg-surface-variant px-3 py-1.5 rounded-sm border border-outline-var transition-colors hover:border-primary/50 hover:bg-surface-bright cursor-default">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary glow-primary shrink-0"></span>
+                  <span class="font-display text-on-surface font-bold text-sm tracking-wide">{item.name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Education section -->
+  <section class="py-20 bg-surface-low" aria-label="Education">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-12">
+        <p class="section-label text-outline mb-2">// ACADEMIC_RECORDS</p>
+        <h2 class="font-display font-bold text-2xl text-on-surface tracking-tight" style="letter-spacing: -0.01em;">
+          Education
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {education.map((edu, idx) => (
+          <article class="card p-8 flex flex-col gap-4" id={`edu-${idx}`}>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="section-label text-primary mb-2">{edu.status}</p>
+                <h3 class="font-display font-bold text-xl text-on-surface tracking-tight mb-1">
+                  {edu.degree}
+                </h3>
+                <p class="mono-data text-secondary text-sm">{edu.institution}</p>
+              </div>
+            </div>
+            <p class="text-on-surface-var text-sm leading-relaxed">{edu.desc}</p>
+            <div class="flex flex-wrap gap-2">
+              {edu.tags.map((tag) => (
+                <span class="label-tag">{tag}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

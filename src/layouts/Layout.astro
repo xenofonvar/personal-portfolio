@@ -1,0 +1,160 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Xenofon Varelis — Full-Stack Software Engineer & AI Researcher based in Athens, Greece.' } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/',           label: 'HOME' },
+  { href: '/experience', label: 'EXPERIENCE' },
+  { href: '/skills',     label: 'SKILLS' },
+  { href: '/contact',    label: 'CONTACT' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  </head>
+
+  <body class="min-h-screen bg-surface text-on-surface antialiased overflow-x-hidden">
+    <!-- Scanline overlay for CRT effect -->
+    <div class="scanline" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50" id="site-header">
+      <div
+        class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between"
+        style="backdrop-filter: blur(12px); background: rgba(10,14,20,0.85); border-bottom: 1px solid rgba(68,72,79,0.2);"
+      >
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 no-underline group" id="nav-logo">
+          <span
+            class="font-mono text-xs font-bold tracking-widest text-primary text-glow"
+            style="letter-spacing: 0.15em;"
+          >
+           Xenofon<span class="text-on-surface-var">.Varelis</span>
+          </span>
+          <span class="cursor-blink text-primary font-mono text-sm leading-none">_</span>
+        </a>
+
+        <!-- Nav links -->
+        <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+          {navLinks.map(({ href, label }) => {
+            const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+            return (
+              <a
+                href={href}
+                class={`nav-link${isActive ? ' active' : ''}`}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {label}
+              </a>
+            );
+          })}
+        </nav>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-on-surface-var hover:text-primary transition-colors p-2"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile nav drawer -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-surface-container border-b border-outline-var px-6 py-4"
+      >
+        <nav class="flex flex-col gap-3" aria-label="Mobile navigation">
+          {navLinks.map(({ href, label }) => {
+            const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+            return (
+              <a
+                href={href}
+                class={`nav-link${isActive ? ' active' : ''} py-1`}
+              >
+                {label}
+              </a>
+            );
+          })}
+        </nav>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <main id="main-content" class="pt-16">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface-low border-t border-outline-var mt-20">
+      <div class="mx-auto max-w-7xl px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+       
+        <p class="mono-data text-xs text-outline">
+          © 2024 XENOFON VARELIS. ALL RIGHTS RESERVED.
+        </p>
+        <div class="flex items-center gap-4">
+          <a
+            href="https://github.com/xenofonvar"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="section-label text-outline hover:text-primary transition-colors"
+            id="footer-github"
+          >GITHUB</a>
+          <a
+            href="https://www.linkedin.com/in/xenofon-varelis-71ba18231"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="section-label text-outline hover:text-primary transition-colors"
+            id="footer-linkedin"
+          >LINKEDIN</a>
+          <a
+            href="mailto:xenvarelis@hotmail.com"
+            class="section-label text-outline hover:text-primary transition-colors"
+            id="footer-email"
+          >EMAIL</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      btn?.addEventListener('click', () => {
+        const isHidden = menu?.classList.contains('hidden');
+        menu?.classList.toggle('hidden', !isHidden);
+        btn.setAttribute('aria-expanded', String(isHidden));
+      });
+    </script>
+  </body>
+</html>

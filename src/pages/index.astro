@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const techStack = ['JavaScript', 'TypeScript', 'Python','React', 'SolidJS', 'Vue Js',
+'Nuxt Js' , 'Tailwind CSS', 'Flutter','FastAPI', 'Express.js'];
+---
+
+<Layout
+  title="Xenofon Varelis"
+  description="Xenofon Varelis — Full-Stack Software Engineer & AI Researcher. Bridging scalable architecture and cutting-edge machine intelligence."
+>
+  <!-- Hero Section -->
+  <section
+    class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-surface"
+    aria-label="Hero"
+  >
+    <!-- Background grid + ambient glow -->
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background-image: linear-gradient(rgba(156, 255, 147, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(156,255,147,0.03) 1px, transparent 1px); background-size: 60px 60px;"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="pointer-events-none absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full pulse-glow"
+      style="background: radial-gradient(circle, rgba(156,255,147,0.06) 0%, transparent 70%);"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="pointer-events-none absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full"
+      style="background: radial-gradient(circle, rgba(138,242,255,0.05) 0%, transparent 70%);"
+      aria-hidden="true"
+    ></div>
+
+    <div class="relative mx-auto max-w-7xl px-6 py-24 w-full">
+      <!-- Main heading -->
+      <div class="mb-6 animate-fade-up delay-100">
+        <h1 class="page-title">
+          <span class="block text-on-surface">XENOFON</span>
+          <span class="block gradient-text">VARELIS</span>
+        </h1>
+      </div>
+
+      <!-- Role -->
+      <div class="mb-8 animate-fade-up delay-200">
+        <h2
+          class="font-mono text-sm md:text-base font-semibold tracking-widest text-primary"
+          style="letter-spacing: 0.12em;"
+        >
+          FULL-STACK ENGINEER // AI RESEARCHER
+        </h2>
+      </div>
+
+      <!-- Description -->
+      <p
+        class="max-w-2xl text-on-surface-var text-base md:text-lg leading-relaxed mb-10 animate-fade-up delay-300"
+      >
+      Computer Science graduate from the University of Athens, building production-grade software and exploring the  neural architectures 
+      at the intersection of AI and embedded systems.
+      </p>
+
+      <!-- Tech chips -->
+      <div class="flex flex-wrap gap-2 mb-12 animate-fade-up delay-400" aria-label="Core technologies">
+        {techStack.map((tech) => (
+          <span class="chip">{tech}</span>
+        ))}
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-wrap gap-4 animate-fade-up delay-500">
+        <a href="/experience" class="btn-primary" id="hero-cta-experience">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+          VIEW EXPERIENCE
+        </a>
+        <a href="/contact" class="btn-ghost" id="hero-cta-contact">ESTABLISH CONTACT</a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Featured skills preview -->
+  <section class="py-10 bg-surface" aria-label="Skills preview">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <p class="section-label text-outline mb-2">// CORE_SYSTEMS</p>
+          <h2 class="font-display font-bold text-3xl md:text-4xl text-on-surface tracking-tight" style="letter-spacing: -0.02em;">
+            Built with Precision
+          </h2>
+        </div>
+        <a href="/skills" class="btn-ghost hidden md:inline-flex" id="home-skills-link">VIEW ALL SKILLS</a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { group: 'Languages',  items: ['TypeScript', 'Python', 'JavaScript'] },
+          { group: 'Frontend',   items: ['React', 'SolidJS', 'Vue Js','Nuxt Js' , 'Tailwind CSS', 'Flutter', 'Astro', 'CSS/HTML'] },
+          { group: 'Backend',    items: ['Node.js', 'Hapi.js','FastAPI', 'Express.js'] },
+          
+        ].map((col) => (
+          <div class="card p-5">
+            <p class="section-label text-primary mb-4">{col.group}</p>
+            <ul class="space-y-2">
+              {col.items.map((item) => (
+                <li class="flex items-center gap-2">
+                  <span class="w-1 h-1 rounded-sm bg-primary inline-block shrink-0"></span>
+                  <span class="mono-data text-on-surface-var text-xs">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 md:hidden">
+        <a href="/skills" class="btn-ghost w-full justify-center" id="home-skills-link-mobile">VIEW ALL SKILLS</a>
+      </div>
+    </div>
+  </section>
+</Layout>

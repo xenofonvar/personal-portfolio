@@ -1,0 +1,129 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const roles = [
+  {
+    company: 'P3 Group GmbH',
+    role: 'Software Engineer',
+    period: '2023 — Present',
+    location: 'Athens, GR (Remote)',
+    category: 'FULL-STACK_SYSTEMS',
+    projects: [
+      {
+        name: 'Hager / E3DC Flow',
+        tags: ['TypeScript', 'Node.js', 'Hapi.js', 'Microservices'],
+        desc: 'Developed backend and frontend features for a microservices-based energy-management platform handling residential E3DC storage systems, PV installations, and EV-charging infrastructure.',
+      },
+      {
+        name: 'HiL in the Cloud',
+        tags: ['SolidJS', 'TypeScript'],
+        desc: 'Contributed to a SolidJS and TypeScript-based web platform for networking distributed Hardware-in-the-Loop (HiL) systems, facilitating complex hardware testing environments in cloud architectures.',
+      },
+      {
+        name: 'SUMS',
+        tags: ['React', 'TypeScript'],
+        desc: 'Independently developed two complete React applications for software update management — providing tailored interfaces for both OEMs and their suppliers.',
+      },
+      {
+        name: 'Hyyve',
+        tags: ['React'],
+        desc: 'Built the React frontend for Hyyve, an innovative platform aimed at making complex, domain-specific knowledge more accessible. Leveraged Knowledge Graphs and Path Retrieval-Augmented Generation (PathRAG) architectures designed with Domain Driven Design (DDD) principles.',
+      },
+    ],
+  },
+  {
+    company: 'Dataverse Ltd.',
+    role: 'Software Engineer',
+    period: '2022 — 2023',
+    location: 'Athens, GR',
+    category: 'SMART_AGRICULTURE',
+    projects: [
+      {
+        name: 'Camvio',
+        tags: ['React', 'Satellite Imagery', 'Sensor Data'],
+        desc: 'Developed user interface for a ReactJS-based smart agriculture web application leveraging real-time satellite data for precision farming and crop health monitoring.',
+      },
+    ],
+  },
+  {
+    company: 'Netcompany',
+    role: 'Software Engineer Intern',
+    period: '2022',
+    location: 'Athens, GR',
+    category: 'BANKING_PLATFORM',
+    projects: [
+      {
+        name: 'Ecommbx Banking Platform',
+        tags: ['TypeScript'],
+        desc: 'Contributed to an enterprise-grade core banking platform. Focused on implementing TypeScript best practices and adhering to Clean Architecture principles to ensure long-term maintainability and robustness of financial transactions.',
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Experience | Xenofon Varelis"
+  description="Career history of Xenofon Varelis — Full-Stack Software Engineer at P3 Group, Dataverse, and Netcompany."
+>
+  <!-- Page header -->
+  <section class="bg-surface-low py-20 border-b border-outline-var" aria-label="Page header">
+    <div class="mx-auto max-w-7xl px-6">
+    
+      <h1 class="page-title mb-6">
+        <span class="text-on-surface">Career</span>
+        <br />
+        <span class="gradient-text">History</span>
+      </h1>
+      <p class="max-w-2xl text-on-surface-var text-base leading-relaxed">
+        A technical breakdown of all the projects I have worked on over the years.
+      </p>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-20 bg-surface" aria-label="Experience timeline">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="space-y-20">
+        {roles.map((role, roleIdx) => (
+          <article class="relative" id={`role-${roleIdx}`}>
+            
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-10">
+              <div>
+                <p class="section-label text-primary mb-2">// {role.category}</p>
+                <h2 class="font-display font-bold text-2xl md:text-3xl text-on-surface tracking-tight mb-1" style="letter-spacing: -0.01em;">
+                  {role.company}
+                </h2>
+                <p class="font-mono text-sm text-secondary tracking-wide">{role.role}</p>
+              </div>
+              <div class="flex flex-col items-start md:items-end gap-1 shrink-0">
+                <span class="mono-data text-outline">{role.period}</span>
+                <span class="mono-data text-outline">{role.location}</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:pl-8 border-l border-outline-var ml-0 md:ml-4 pl-4">
+              {role.projects.map((project, pIdx) => (
+                <div class="card p-6 group" id={`project-${roleIdx}-${pIdx}`}>
+                  <div class="flex items-start justify-between gap-3 mb-4">
+                    <h3 class="font-display font-bold text-lg text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                      {project.name}
+                    </h3>
+                  </div>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map((tag) => (
+                      <span class="label-tag">{tag}</span>
+                    ))}
+                  </div>
+                  <p class="text-on-surface-var text-sm leading-relaxed">
+                    {project.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
